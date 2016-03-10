@@ -1,0 +1,15 @@
+#!/bin/bash
+# stressKiller
+
+if [ -d /tmp/stressKiller ]; then
+    rm -rf /tmp/stressKiller
+    mkdir /tmp/stressKiller
+else
+    mkdir /tmp/stressKiller
+fi
+
+num=$((RANDOM%16+1))
+
+youtube-dl --playlist-start $num --playlist-end $num -x --audio-format mp3 -o "/tmp/stressKiller/song.%(ext)s" https://www.youtube.com/playlist?list=PLYu0MnW7mb0cxC9MzOsy0IOn8_Qigq4bM
+clear
+cvlc --quiet /tmp/stressKiller/song.mp3
