@@ -1,15 +1,20 @@
 #!/bin/bash
 # stressKiller
 
-if [ -d /tmp/stressKiller ]; then
-    rm -rf /tmp/stressKiller
-    mkdir /tmp/stressKiller
-else
-    mkdir /tmp/stressKiller
-fi
+uuid=$(uuidgen)
+uuid=${uuid^^}
+
+mkdir /tmp/$uuid
 
 num=$((RANDOM%16+1))
 
-youtube-dl --playlist-start $num --playlist-end $num -x --audio-format mp3 -o "/tmp/stressKiller/song.%(ext)s" https://www.youtube.com/playlist?list=PLYu0MnW7mb0cxC9MzOsy0IOn8_Qigq4bM
+youtube-dl --playlist-start $num --playlist-end $num -x --audio-format mp3 -o "/tmp/$uuid/song.%(ext)s" https://www.youtube.com/playlist?list=PLYu0MnW7mb0cxC9MzOsy0IOn8_Qigq4bM
 clear
-cvlc --quiet /tmp/stressKiller/song.mp3
+ffplay -loglevel -8 -nodisp /tmp/$uuid/song.mp3 | echo "Relax Now..."
+
+echo "-*Removing evidences*-"
+
+rm -rf /tmp/$uuid
+
+
+
