@@ -15,5 +15,5 @@ This script comes to the rescue of all you music lovers with those guilty pleasu
 
 **TODO**:
 - arguments, so you can: 
-  add your personnal playlist
-  add a gold song to play even if offline
+  - add your personnal playlist
+  - add a gold song to play even if offline
