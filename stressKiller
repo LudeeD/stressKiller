@@ -1,15 +1,61 @@
 #!/bin/bash
 # stressKiller
 
+### Constants ###
+playlist=https://www.youtube.com/playlist?list=PLYu0MnW7mb0cxC9MzOsy0IOn8_Qigq4bM
+size=16
 uuid=$(uuidgen)
 uuid=${uuid^^}
 
-mkdir /tmp/$uuid
+### Functions ###
 
-num=$((RANDOM%16+1))
+# Display Usage #
+function usage
+{
+    clear
+	echo -e "\t\t------------------\n\t\t|  stressKiller  |\n\t\t------------------"
+	echo -e "\nUse it without arguments and play a random song from the Playlist\n"
+    echo -e "\t$ stressKiller [Option] [Argument0] [Argument1]]\n"
+    echo -e "Options:\n"
+    echo -e "(*) -h \v-> show this\n"
+    echo -e "(*) -p \v-> [Argument0] pass a youtube playlist to set it as your\n\t default one\n       -> [Argument1] pass the size of the playlist\n"
+}
 
-youtube-dl --playlist-start $num --playlist-end $num -x --audio-format mp3 -o "/tmp/$uuid/song.%(ext)s" https://www.youtube.com/playlist?list=PLYu0MnW7mb0cxC9MzOsy0IOn8_Qigq4bM
+# Change Playlist #
+function changePlaylist
+{
+    sed '0,/.*playlist=.*/s/.*playlist=.*/playlist=${1}/' ~/bin/stressKiller
+    playlist=$1
+    sed '0,/.*size=.*/s/.*ize=.*/size=${2}/' ~/bin/stressKiller
+    size=$2
+    clear
+}
+### Main ###
+while getopts ":hp:s:g" opt; do
+  case $opt in
+    h)  
+        usage
+        exit
+        ;;
+    p)  
+        changePlaylist $2 $3
+        ;;       
+    g)  
+        echo "-gold was triggered" >&2
+        ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+num=$((RANDOM%$size+1))
+
+youtube-dl --playlist-start $num --playlist-end $num -x --audio-format mp3 -o "/tmp/$uuid/song.%(ext)s" $playlist
 clear
+
 ffplay -loglevel -8 -nodisp /tmp/$uuid/song.mp3 | echo "Relax Now..."
 
 echo "-*Removing evidences*-"
