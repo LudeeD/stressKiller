@@ -2,8 +2,8 @@
 # stressKiller
 
 ### Constants ###
-playlist=https://www.youtube.com/playlist?list=PLYu0MnW7mb0cxC9MzOsy0IOn8_Qigq4bM
-size=16
+playlist=https://www.youtube.com/playlist?list=PLFy9uG3bpsXYZKdfX_T_S_GitSPMSHVQY
+size=66
 uuid=$(uuidgen)
 uuid=${uuid^^}
 
