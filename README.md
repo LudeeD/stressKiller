@@ -5,7 +5,7 @@ When you're tired of working hard and you start drifting away, sometimes all you
 This script comes to the rescue of all you music lovers with those guilty pleasure songs. Just type in stressKiller and let it take you to that special place with the benefit of having no evidence afterwards of the inocent crime.
 
 **Dependencies(the things you need to run this)**:
-- youtube-dl
+- [youtube-dl](https://github.com/rg3/youtube-dl)
 - ffmpeg
 
 **Intructions**:
@@ -15,5 +15,5 @@ This script comes to the rescue of all you music lovers with those guilty pleasu
 
 **TODO**:
 - arguments, so you can: 
-  - add your personnal playlist
+  - ~~add your personnal playlist~~ **done**
   - add a gold song to play even if offline
